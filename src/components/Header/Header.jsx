@@ -28,6 +28,8 @@ const Header = () => {
           <ul className="util">
             <li>매장 찾기</li>
             <li>고객센터</li>
+            <li>주문조회</li>
+            <li>택배 서비스</li>
           </ul>
         </div>
       </div>
