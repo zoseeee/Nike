@@ -18,8 +18,7 @@
             .brand {
                 li {
                     .brand-image {
-                        width: 19px;
-                        height: 18px;
+                        width: 22px;
     
                         img {
                             display: block;
@@ -32,7 +31,7 @@
             }
 
             .util {
-                font-size: 14px;
+                font-size: 13px;
                 font-weight: 500;
                 letter-spacing: 0.1rem;
             }
@@ -47,8 +46,7 @@
         width: 100%;
 
         .logo {
-            width: 60px;
-            height: 21px;
+            width: 70px;
 
             img {
                 display: block;
@@ -63,7 +61,15 @@
 
                 li {
                     a {
+                        font-size: 16px;
+                        font-weight: 500;
                         padding: 0 15px;
+                    }
+
+                    &:last-child {
+                        a {
+                            padding: 0 0 0 15px;
+                        }
                     }
                 }
             }

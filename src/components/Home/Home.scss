@@ -3,7 +3,9 @@
     .main-content {
         .main-image {
             display: block;
-            margin-bottom: 30px;
+            margin-bottom: 60px;
+            width: 100%;
+            object-fit: cover;
         }
 
         .container {
@@ -11,13 +13,14 @@
                 text-align: center;
             
                 h3 {
-                    font-size: 50px;
+                    font-size: 48px;
                     font-weight: 800;
                     margin-bottom: 30px;
                 }
             
                 p {
-                    font-size: 18px;
+                    font-size: 16px;
+                    font-weight: 500;
                     line-height: 30px;
                     letter-spacing: 0.04rem;
             
