@@ -1,6 +1,7 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../Header/Header.scss";
+import { login } from "../../service/firebase";
 
 const Header = () => {
   return (
@@ -35,23 +36,23 @@ const Header = () => {
       </div>
       <div className="container">
         <h1 className="logo">
-          <NavLink to="/">
+          <Link to="/">
             <img src={process.env.PUBLIC_URL + "./images/nike.png"} alt="" />
-          </NavLink>
+          </Link>
         </h1>
         <nav className="nav">
           <ul>
             <li>
-              <NavLink to="/products">products</NavLink>
+              <Link to="/products">products</Link>
             </li>
             <li>
-              <NavLink to="/carts">carts</NavLink>
+              <Link to="/carts">carts</Link>
             </li>
             <li>
-              <NavLink to="/products/new">new</NavLink>
+              <Link to="/products/new">new</Link>
             </li>
             <li>
-              <NavLink>login</NavLink>
+              <button onClick={() => login()}>login</button>
             </li>
           </ul>
         </nav>
