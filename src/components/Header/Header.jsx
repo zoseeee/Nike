@@ -1,9 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../Header/Header.scss";
-import { login } from "../../service/firebase";
+import { login, logout, onUserStateChange } from "../../api/firebase";
 
 const Header = () => {
+  const [user, setUser] = useState();
+  const handleLogin = () => {
+    login().then(setUser);
+  };
+  const handleLogout = () => {
+    logout().then(setUser);
+  };
+
+  //사용자 로그인정보 기억하기
+  useEffect(() => {
+    onUserStateChange((user) => {
+      console.log(user)
+      setUser(user);
+    });
+  }, []);
+
   return (
     <header className="Header">
       <div className="bar">
@@ -52,7 +68,8 @@ const Header = () => {
               <Link to="/products/new">new</Link>
             </li>
             <li>
-              <button onClick={() => login()}>login</button>
+              {!user && <button onClick={handleLogin}>login</button>}
+              {user && <button onClick={handleLogout}>logout</button>}
             </li>
           </ul>
         </nav>
