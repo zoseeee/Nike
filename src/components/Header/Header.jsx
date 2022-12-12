@@ -2,20 +2,15 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../Header/Header.scss";
 import { login, logout, onUserStateChange } from "../../api/firebase";
+import User from "../User/User";
 
 const Header = () => {
   const [user, setUser] = useState();
-  const handleLogin = () => {
-    login().then(setUser);
-  };
-  const handleLogout = () => {
-    logout().then(setUser);
-  };
 
   //사용자 로그인정보 기억하기
   useEffect(() => {
     onUserStateChange((user) => {
-      console.log(user)
+      console.log(user);
       setUser(user);
     });
   }, []);
@@ -64,12 +59,19 @@ const Header = () => {
             <li>
               <Link to="/carts">carts</Link>
             </li>
+            {user && user.isAdmin && (
+              <li>
+                <Link to="/products/new">new</Link>
+              </li>
+            )}
+            {user && (
+              <li>
+                <User user={user} />
+              </li>
+            )}
             <li>
-              <Link to="/products/new">new</Link>
-            </li>
-            <li>
-              {!user && <button onClick={handleLogin}>login</button>}
-              {user && <button onClick={handleLogout}>logout</button>}
+              {!user && <button onClick={login}>login</button>}
+              {user && <button onClick={logout}>logout</button>}
             </li>
           </ul>
         </nav>
