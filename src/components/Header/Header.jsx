@@ -69,9 +69,13 @@ const Header = () => {
                 <User user={user} />
               </li>
             )}
-            <li>
-              {!user && <button onClick={login}>login</button>}
-              {user && <button onClick={logout}>logout</button>}
+            <li className="login">
+              {!user && (
+                <div onClick={login}>
+                  <i className="xi-user-o"></i> login
+                </div>
+              )}
+              {user && <div onClick={logout}>logout</div>}
             </li>
           </ul>
         </nav>

@@ -5,7 +5,7 @@ const User = ({ user: { displayName, photoURL } }) => {
   return (
     <div className="user-image">
       <img src={photoURL} alt={displayName} referrerPolicy="no-referrer" />
-      <span>{displayName}</span>
+      <span>{displayName} 님</span>
     </div>
   );
 };
