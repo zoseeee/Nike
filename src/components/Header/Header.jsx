@@ -1,19 +1,10 @@
-import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../Header/Header.scss";
-import { login, logout, onUserStateChange } from "../../api/firebase";
 import User from "../User/User";
+import { useAuthContext } from "../context/AuthContext";
 
 const Header = () => {
-  const [user, setUser] = useState();
-
-  //사용자 로그인정보 기억하기
-  useEffect(() => {
-    onUserStateChange((user) => {
-      console.log(user);
-      setUser(user);
-    });
-  }, []);
+  const { user, login, logout } = useAuthContext();
 
   return (
     <header className="Header">
@@ -69,13 +60,18 @@ const Header = () => {
                 <User user={user} />
               </li>
             )}
-            <li className="login">
+            <li className="button">
               {!user && (
                 <div onClick={login}>
-                  <i className="xi-user-o"></i> login
+                  <i className="xi-user-o"></i>
+                  <span>login</span>
                 </div>
               )}
-              {user && <div onClick={logout}>logout</div>}
+              {user && (
+                <div onClick={logout}>
+                  <span>logout</span>
+                </div>
+              )}
             </li>
           </ul>
         </nav>
