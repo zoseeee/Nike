@@ -1,10 +1,14 @@
 import React, { useState } from "react";
+import { addNewProduct } from "../../api/firebase";
 import { uploadImage } from "../../api/uploader";
 import "../NewProduct/NewProduct.scss";
 
 const NewProduct = () => {
   const [product, setProduct] = useState({});
   const [file, setFile] = useState();
+  const [isUploading, setIsUploading] = useState(false);
+  const [success, setSuccess] = useState();
+
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (name === "file") {
@@ -15,73 +19,99 @@ const NewProduct = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    uploadImage(file).then((url) => {
-      console.log(url);
-      // Firebase에 새로운 product를 추가함
-    });
+    setIsUploading(true);
+    uploadImage(file) //
+      .then((url) => {
+        // Firebase에 새로운 product를 추가함
+        addNewProduct(product, url).then(() => {
+          setSuccess("성공적으로 제품이 추가되었습니다.");
+          setTimeout(() => {
+            setSuccess(null);
+          }, 4000);
+        });
+      })
+      .finally(() => setIsUploading(false));
   };
 
   return (
-    <section className="new-product">
+    <section className="newProduct">
       <div className="container">
-        <h2 className="title">새로운 제품 등록</h2>
-        {file && (
-          <img
-            src={URL.createObjectURL(file)}
-            alt="local file"
-            referrerPolicy="no-referrer"
-          />
-        )}
-        <form onSubmit={handleSubmit}>
-          <input
-            type="file"
-            accept="image/*"
-            name="file"
-            required
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            name="title"
-            value={product.title ?? ""}
-            placeholder="제품명"
-            required
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            name="price"
-            value={product.price ?? ""}
-            placeholder="가격"
-            required
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            name="catecory"
-            value={product.catecory ?? ""}
-            placeholder="카테고리"
-            required
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            name="description"
-            value={product.description}
-            placeholder="제품 설명"
-            required
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            name="options"
-            value={product.options ?? ""}
-            placeholder="옵션(콤마(,)로 구분)"
-            required
-            onChange={handleChange}
-          />
-          <button>제품 등록하기</button>
-        </form>
+        <div className="title-wrapper">
+          <h2 className="title">새로운 제품 등록</h2>
+          {success && <span className="alert">🔔 {success}</span>}
+        </div>
+        <div className="inner">
+          <div className="product-image">
+            {file ? (
+              <img
+                className="image-file"
+                src={URL.createObjectURL(file)}
+                alt="local file"
+                referrerPolicy="no-referrer"
+              />
+            ) : (
+              <p>파일 없음</p>
+            )}
+          </div>
+          <form className="form" onSubmit={handleSubmit}>
+            <input
+              className="input"
+              type="file"
+              accept="image/*"
+              name="file"
+              required
+              onChange={handleChange}
+            />
+            <input
+              className="input"
+              type="text"
+              name="title"
+              value={product.title ?? ""}
+              placeholder="제품명"
+              required
+              onChange={handleChange}
+            />
+            <input
+              className="input"
+              type="text"
+              name="price"
+              value={product.price ?? ""}
+              placeholder="가격"
+              required
+              onChange={handleChange}
+            />
+            <input
+              className="input"
+              type="text"
+              name="catecory"
+              value={product.catecory ?? ""}
+              placeholder="카테고리"
+              required
+              onChange={handleChange}
+            />
+            <input
+              className="input"
+              type="text"
+              name="description"
+              value={product.description}
+              placeholder="제품 설명"
+              required
+              onChange={handleChange}
+            />
+            <input
+              className="input"
+              type="text"
+              name="options"
+              value={product.options ?? ""}
+              placeholder="옵션(콤마(,)로 구분)"
+              required
+              onChange={handleChange}
+            />
+            <button className="button">
+              {isUploading ? "업로드중..." : "제품 등록하기"}
+            </button>
+          </form>
+        </div>
       </div>
     </section>
   );

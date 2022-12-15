@@ -1,3 +1,4 @@
+//Cloudinary에 이미지 업로드하기
 export async function uploadImage(file) {
   const data = new FormData();
   data.append("file", file);
