@@ -13,7 +13,6 @@ const Header = () => {
           <ul className="brand">
             <li>
               <div className="brand-image">
-                
                 <img
                   src={process.env.PUBLIC_URL + "./images/jordan.png"}
                   alt=""
@@ -70,6 +69,7 @@ const Header = () => {
               )}
               {user && (
                 <div onClick={logout}>
+                  <i className="xi-user-o"></i>
                   <span>Logout</span>
                 </div>
               )}
