@@ -13,6 +13,7 @@ const Header = () => {
           <ul className="brand">
             <li>
               <div className="brand-image">
+                
                 <img
                   src={process.env.PUBLIC_URL + "./images/jordan.png"}
                   alt=""
@@ -45,14 +46,14 @@ const Header = () => {
         <nav className="nav">
           <ul>
             <li>
-              <Link to="/products">products</Link>
+              <Link to="/products">Products</Link>
             </li>
             <li>
-              <Link to="/carts">carts</Link>
+              <Link to="/carts">Cart</Link>
             </li>
             {user && user.isAdmin && (
               <li>
-                <Link to="/products/new">new</Link>
+                <Link to="/products/new">New</Link>
               </li>
             )}
             {user && (
@@ -64,12 +65,12 @@ const Header = () => {
               {!user && (
                 <div onClick={login}>
                   <i className="xi-user-o"></i>
-                  <span>login</span>
+                  <span>Login</span>
                 </div>
               )}
               {user && (
                 <div onClick={logout}>
-                  <span>logout</span>
+                  <span>Logout</span>
                 </div>
               )}
             </li>

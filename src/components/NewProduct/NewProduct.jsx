@@ -50,7 +50,9 @@ const NewProduct = () => {
                 referrerPolicy="no-referrer"
               />
             ) : (
-              <p>파일 없음</p>
+              <div className="no-file">
+                No File
+              </div>
             )}
           </div>
           <form className="form" onSubmit={handleSubmit}>
